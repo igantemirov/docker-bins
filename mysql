@@ -1,0 +1,11 @@
+#!/bin/bash
+command_container_run="docker run --name mysql-container -it --rm -d \
+        -e MYSQL_ROOT_PASSWORD=root        
+        -v mysql-volume:/var/lib/mysql \
+        --network mysql-network \
+        mysql:8"
+
+docker network inspect mysql-network >/dev/null 2>&1 || docker network create mysql-network
+
+echo "Running MYSQL on Docker"
+$command_container_run
